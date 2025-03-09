@@ -1,78 +1,58 @@
-// src/components/VoiceCommand.js
-import React from 'react';
-import 'regenerator-runtime/runtime';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
-const VoiceCommand = () => {
-  const navigate = useNavigate();
+const VoiceCommand = ({ onSearch }) => {
+  const [isListening, setIsListening] = useState(false);
 
-  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition({
-    commands: [
-      {
-        command: 'search *',
-        callback: (searchTerm) => {
-          console.log(`Searching for: ${searchTerm}`);
-          // Implement search logic here
-        },
-      },
-      {
-        command: 'go to dashboard',
-        callback: () => {
-          navigate('/dashboard');
-          console.log('Navigating to dashboard');
-        },
-      },
-      {
-        command: 'go to documents',
-        callback: () => {
-          navigate('/documents');
-          console.log('Navigating to documents');
-        },
-      },
-      {
-        command: 'go to admin',
-        callback: () => {
-          navigate('/admin');
-          console.log('Navigating to admin dashboard');
-        },
-      },
-      {
-        command: 'go to login',
-        callback: () => {
-          navigate('/login');
-          console.log('Navigating to login page');
-        },
-      },
-      {
-        command: 'go to register',
-        callback: () => {
-          navigate('/register');
-          console.log('Navigating to register page');
-        },
-      },
-    ],
-  });
+  const startListening = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      console.error('Speech recognition not supported in this browser');
+      return;
+    }
 
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
-  }
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event) => {
+      if (event.results && event.results[0] && event.results[0][0]) {
+        const transcript = event.results[0][0].transcript;
+        onSearch(transcript);
+      }
+      setIsListening(false);
+    };
+
+    recognition.onerror = (event) => {
+      if (event.error !== 'no-speech') {
+        console.error('Speech recognition error:', event.error);
+      }
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    try {
+      recognition.start();
+      setIsListening(true);
+    } catch (error) {
+      console.error('Speech recognition error:', error);
+      setIsListening(false);
+    }
+  };
 
   return (
-    <div>
-      <p>Transcript: {transcript}</p>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <h3>Sample Voice Commands:</h3>
-      <ul>
-        <li>"Search [term]" - Search for documents</li>
-        <li>"Go to dashboard" - Navigate to the main dashboard</li>
-        <li>"Go to documents" - Navigate to the document management page</li>
-        <li>"Go to admin" - Navigate to the admin dashboard</li>
-        <li>"Go to login" - Navigate to the login page</li>
-        <li>"Go to register" - Navigate to the registration page</li>
-      </ul>
-    </div>
+    <button
+      className={`voice-trigger ${isListening ? 'active' : ''}`}
+      onClick={startListening}
+      disabled={isListening}
+      aria-label="Voice search"
+      title="Click to start voice search"
+    >
+      {isListening ? 'Listening...' : 'Voice Search'}
+    </button>
   );
 };
 

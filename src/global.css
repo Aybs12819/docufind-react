@@ -1,0 +1,84 @@
+/* src/global.css */
+
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* PSU-Specific Colors */
+:root {
+  --psu-royal-blue: #003366;
+  --psu-golden-yellow: #ffcc00;
+  --psu-lighter-blue: #336699;
+}
+
+/* General Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa; /* Light Gray Background */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Enhanced Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--psu-royal-blue);
+  font-weight: bold;
+}
+
+/* Link Styles */
+a {
+  color: #007bff; /* Bootstrap Primary Color */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Layout Container */
+.container {
+  padding: 20px;
+}
+
+/* Custom Classes for Consistent Styling */
+.header {
+  background-color: var(--psu-royal-blue);
+  color: var(--psu-golden-yellow);
+  padding: 20px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.footer {
+  background-color: var(--psu-royal-blue);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--psu-royal-blue);
+  border-color: var(--psu-royal-blue);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #002244;
+  border-color: #002244;
+}

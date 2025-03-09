@@ -1,0 +1,130 @@
+.authContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+
+.authForm {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.authForm h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.formGroup input:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+.submitButton {
+    width: 100%;
+    padding: 0.75rem;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+    background: #0052a3;
+}
+
+.submitButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.error {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    background: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    color: #c00;
+}
+
+.success {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    background: #e6ffe6;
+    border: 1px solid #b3ffb3;
+    border-radius: 4px;
+    color: #006600;
+}
+
+.authLinks {
+    margin-top: 1rem;
+    text-align: center;
+    color: #666;
+}
+
+.authLinks a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.authLinks a:hover {
+    text-decoration: underline;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.forgotPassword {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgotPassword:hover {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+.backToLogin {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.backToLogin:hover {
+    text-decoration: underline;
+}
